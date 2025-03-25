@@ -1,6 +1,6 @@
 # Create CodePipeline
 resource "aws_codepipeline" "pipeline" {
-  name     = "${var.app_name}-pipeline-2"
+  name     = "${var.app_name}-pipeline-5"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
@@ -69,7 +69,7 @@ resource "aws_codepipeline" "pipeline" {
 
 # Create webhook for the pipeline
 resource "aws_codepipeline_webhook" "github_webhook" {
-  name            = "${var.app_name}-webhook-2"
+  name            = "${var.app_name}-webhook-5"
   authentication  = "GITHUB_HMAC"
   target_action   = "Source"
   target_pipeline = aws_codepipeline.pipeline.name
@@ -82,29 +82,4 @@ resource "aws_codepipeline_webhook" "github_webhook" {
     json_path    = "$.ref"
     match_equals = "refs/heads/${var.github_branch}"
   }
-}
-
-# Register the webhook with GitHub
-resource "null_resource" "register_webhook" {
-  provisioner "local-exec" {
-    command = <<EOF
-      curl -X POST \
-        -H "Authorization: token ${var.github_token}" \
-        -H "Accept: application/vnd.github.v3+json" \
-        https://api.github.com/repos/${var.github_repo}/hooks \
-        -d '{
-          "name": "web",
-          "active": true,
-          "events": ["push"],
-          "config": {
-            "url": "${aws_codepipeline_webhook.github_webhook.url}",
-            "content_type": "json",
-            "insecure_ssl": "0",
-            "secret": "${var.github_token}"
-          }
-        }'
-    EOF
-  }
-
-  depends_on = [aws_codepipeline_webhook.github_webhook]
 }

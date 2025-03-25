@@ -1,6 +1,6 @@
 # S3 bucket for CodePipeline artifacts
 resource "aws_s3_bucket" "artifact_bucket" {
-  bucket_prefix = "${var.app_name}-artifacts-2-"
+  bucket_prefix = "${var.app_name}-artifacts-5-"
   force_destroy = true
 }
 

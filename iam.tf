@@ -1,6 +1,6 @@
 # CodeBuild IAM Role
 resource "aws_iam_role" "codebuild_role" {
-  name = "${var.app_name}-codebuild-role-2"
+  name = "${var.app_name}-codebuild-role-5"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -18,7 +18,7 @@ resource "aws_iam_role" "codebuild_role" {
 
 resource "aws_iam_role_policy" "codebuild_policy" {
   role = aws_iam_role.codebuild_role.name
-  name = "${var.app_name}-codebuild-policy-2"
+  name = "${var.app_name}-codebuild-policy-5"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -61,7 +61,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
 
 # ECS Task Execution Role
 resource "aws_iam_role" "ecs_execution_role" {
-  name = "${var.app_name}-ecs-execution-role-2"
+  name = "${var.app_name}-ecs-execution-role-5"
   
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -84,7 +84,7 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_role_policy" {
 
 # CodePipeline IAM Role
 resource "aws_iam_role" "codepipeline_role" {
-  name = "${var.app_name}-codepipeline-role-2"
+  name = "${var.app_name}-codepipeline-role-5"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -101,7 +101,7 @@ resource "aws_iam_role" "codepipeline_role" {
 }
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
-  name = "${var.app_name}-codepipeline-policy-2"
+  name = "${var.app_name}-codepipeline-policy-5"
   role = aws_iam_role.codepipeline_role.name
 
   policy = jsonencode({

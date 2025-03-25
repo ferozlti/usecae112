@@ -20,5 +20,3 @@ crash.*.log
 .terraformrc
 terraform.rc
 
-*.tfvars
-.env

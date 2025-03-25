@@ -12,7 +12,7 @@ data "aws_subnets" "default" {
 
 # Security group for ECS
 resource "aws_security_group" "ecs_sg" {
-  name        = "${var.app_name}-ecs-sg-2"
+  name        = "${var.app_name}-ecs-sg-5"
   description = "Allow inbound traffic to Flask application"
   vpc_id      = data.aws_vpc.default.id
   

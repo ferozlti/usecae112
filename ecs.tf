@@ -1,17 +1,17 @@
 # Create CloudWatch log group
 resource "aws_cloudwatch_log_group" "ecs_logs" {
-  name = "/ecs/${var.app_name}-2"
+  name = "/ecs/${var.app_name}-5"
   retention_in_days = 30
 }
 
 # ECS Cluster
 resource "aws_ecs_cluster" "app_cluster" {
-  name = "${var.app_name}-cluster-2"
+  name = "${var.app_name}-cluster-5"
 }
 
 # ECS Task Definition
 resource "aws_ecs_task_definition" "app_task" {
-  family                   = "${var.app_name}-task-2"
+  family                   = "${var.app_name}-task-5"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "app_task" {
   
   container_definitions = jsonencode([
     {
-      name      = "${var.app_name}-2"
+      name      = "${var.app_name}-5"
       image     = "${aws_ecr_repository.app_repo.repository_url}:latest"
       essential = true
       
@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "app_task" {
 
 # ECS Service
 resource "aws_ecs_service" "app_service" {
-  name            = "${var.app_name}-service-2"
+  name            = "${var.app_name}-service-5"
   cluster         = aws_ecs_cluster.app_cluster.id
   task_definition = aws_ecs_task_definition.app_task.arn
   desired_count   = 1
